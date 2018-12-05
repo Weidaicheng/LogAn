@@ -12,28 +12,14 @@ namespace LogAn.Tests
             _analyzer = new LogAnalyzer();
         }
 
-        [Test]
-        public void IsValidFileName_BadExtension_ReturnsFalse()
+        [TestCase("filewithgoodextension.SLF", true)]
+        [TestCase("filewithgoodextension.slf", true)]
+        [TestCase("filewithbadextension.foo", false)]
+        public void IsValidFileName_VariousExtensions_ChecksThem(string file, bool expected)
         {
-            bool result = _analyzer.IsValidLogFileName("filewithbadextension.foo");
+            bool result = _analyzer.IsValidLogFileName(file);
 
-            Assert.False(result);
-        }
-
-        [Test]
-        public void IsValidFileName_GoodExtensionLowercase_ReturnsTrue()
-        {
-            bool result = _analyzer.IsValidLogFileName("filewithgoodextension.slf");
-
-            Assert.True(result);
-        }
-
-        [Test]
-        public void IsValidFileName_GoodExtensionUppercase_ReturnsTrue()
-        {
-            bool result = _analyzer.IsValidLogFileName("filewithgoodextension.SLF");
-
-            Assert.True(result);
+            Assert.AreEqual(expected, result);
         }
     }
 }

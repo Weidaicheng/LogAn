@@ -1,0 +1,5 @@
+.vs/*
+LogAn/bin/*
+LogAn/obj/*
+LogAn.Test/bin/*
+LogAn.Test/obj/*

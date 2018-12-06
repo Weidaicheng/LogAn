@@ -53,6 +53,16 @@ namespace LogAn.Tests
             Assert.That(ex.Message.Contains("filename has to be provided"));
         }
 
+        [Test]
+        [TestCase("badfile.foo", false)]
+        [TestCase("goodfile.slf", true)]
+        public void IsValidFileName_WhenCalled_ChangesWasLastFileNameValid(string file, bool expected)
+        {
+            _analyzer.IsValidLogFileName(file);
+
+            Assert.AreEqual(expected, _analyzer.WasLastFileNameValid);
+        }
+
         [TearDown]
         public void TearDown()
         {

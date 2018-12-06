@@ -30,7 +30,27 @@ namespace LogAn.Tests
             {
                 _analyzer.IsValidLogFileName("");
             });
+
             StringAssert.Contains("filename has to be provided", ex.Message);
+        }
+
+        [Test]
+        [Ignore("there is a problem with this test")]
+        [Category("Tests that has problems")]
+        public void IsValidFileName_AlwaysFail()
+        {
+            Assert.True(false);
+        }
+
+        [Test]
+        public void IsValidFileName_EmptyFileName_ThrowsFluent()
+        {
+            var ex = Assert.Catch<ArgumentException>(() =>
+            {
+                _analyzer.IsValidLogFileName("");
+            });
+
+            Assert.That(ex.Message.Contains("filename has to be provided"));
         }
 
         [TearDown]

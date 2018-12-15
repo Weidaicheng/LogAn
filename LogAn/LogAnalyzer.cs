@@ -6,12 +6,24 @@ namespace LogAn
     {
         private IExtensionManager _manager;
 
-        public LogAnalyzer(IExtensionManager manager)
+        public LogAnalyzer()
         {
-            _manager = manager;
+            _manager = new FileExtensionManager();
         }
 
         public bool WasLastFileNameValid { get; set; }
+
+        public IExtensionManager ExtensionManager
+        {
+            get
+            {
+                return _manager;
+            }
+            set
+            {
+                _manager = value;
+            }
+        }
 
         public bool IsValidLogFileName(string fileName)
         {

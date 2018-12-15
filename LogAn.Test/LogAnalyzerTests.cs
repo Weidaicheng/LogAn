@@ -6,13 +6,13 @@ namespace LogAn.Tests
     public class LogAnalyzerTests
     {
         [Test]
-        public void IsValidFileName_VariousExtensions_ChecksThem()
+        public void IsValidFileName_SupportedExtension_ReturnsTrue()
         {
             FakeExtensionManager myFakeManager = new FakeExtensionManager();
             myFakeManager.WillBaValid = true;
 
-            LogAnalyzer log = new LogAnalyzer(myFakeManager);
-
+            LogAnalyzer log = new LogAnalyzer();
+            log.ExtensionManager = myFakeManager;
             bool result = log.IsValidLogFileName("short.txt");
 
             Assert.True(result);
@@ -24,7 +24,8 @@ namespace LogAn.Tests
             FakeExtensionManager myFakeManager = new FakeExtensionManager();
             myFakeManager.WillThrow = new Exception("this is fake");
 
-            LogAnalyzer log = new LogAnalyzer(myFakeManager);
+            LogAnalyzer log = new LogAnalyzer();
+            log.ExtensionManager = myFakeManager;
             bool result = log.IsValidLogFileName("anything.anyextension");
 
             Assert.False(result);

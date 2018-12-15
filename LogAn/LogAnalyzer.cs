@@ -15,7 +15,14 @@ namespace LogAn
 
         public bool IsValidLogFileName(string fileName)
         {
-            return _manager.IsValid(fileName);
+            try
+            {
+                return _manager.IsValid(fileName);
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

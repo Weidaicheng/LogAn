@@ -1,4 +1,5 @@
 .vs/*
+.vscode/*
 LogAn/bin/*
 LogAn/obj/*
 LogAn.Test/bin/*

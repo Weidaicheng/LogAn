@@ -11,8 +11,8 @@ namespace LogAn.Tests
             FakeExtensionManager myFakeManager = new FakeExtensionManager();
             myFakeManager.WillBaValid = true;
 
+            ExtensionManagerFactory.SetManager(myFakeManager);
             LogAnalyzer log = new LogAnalyzer();
-            log.ExtensionManager = myFakeManager;
             bool result = log.IsValidLogFileName("short.txt");
 
             Assert.True(result);
@@ -24,8 +24,8 @@ namespace LogAn.Tests
             FakeExtensionManager myFakeManager = new FakeExtensionManager();
             myFakeManager.WillThrow = new Exception("this is fake");
 
+            ExtensionManagerFactory.SetManager(myFakeManager);
             LogAnalyzer log = new LogAnalyzer();
-            log.ExtensionManager = myFakeManager;
             bool result = log.IsValidLogFileName("anything.anyextension");
 
             Assert.False(result);

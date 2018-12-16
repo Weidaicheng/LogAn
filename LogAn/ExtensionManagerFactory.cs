@@ -12,11 +12,9 @@
             return new FileExtensionManager();
         }
 
-#if DEBUG
         public static void SetManager(IExtensionManager mgr)
         {
             customManager = mgr;
         }
-#endif
     }
 }

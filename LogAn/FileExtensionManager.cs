@@ -1,6 +1,6 @@
 namespace LogAn
 {
-    public class FileExtensionManager : IExtensionManager
+    public class FileExtensionManager
     {
         public bool IsValid(string fileName)
         {

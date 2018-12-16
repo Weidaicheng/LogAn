@@ -1,28 +1,23 @@
-﻿using System;
-
-namespace LogAn
+﻿namespace LogAn
 {
     public class LogAnalyzer
     {
-        private IExtensionManager _manager;
-
-        public LogAnalyzer()
-        {
-            _manager = ExtensionManagerFactory.Create();
-        }
-
-        public bool WasLastFileNameValid { get; set; }
-
         public bool IsValidLogFileName(string fileName)
         {
             try
             {
-                return _manager.IsValid(fileName);
+                return IsValid(fileName);
             }
             catch
             {
                 return false;
             }
+        }
+
+        protected virtual bool IsValid(string fileName)
+        {
+            FileExtensionManager mgr = new FileExtensionManager();
+            return mgr.IsValid(fileName);
         }
     }
 }

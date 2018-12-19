@@ -5,24 +5,25 @@ namespace LogAn.Tests
     public class LogAnalyzerTests
     {
         [Test]
-        public void IsValidFileName_SupportedExtension_ReturnsTrue()
+        public void Analyze_TooShortFileName_CallsWebService()
         {
-            TestableLogAnalyzer log = new TestableLogAnalyzer();
-            log.IsSupported = true;
+            FakeWebService mockService = new FakeWebService();
+            LogAnalyzer log = new LogAnalyzer(mockService);
+            string tooShortFileName = "abc.ext";
 
-            bool result = log.IsValidLogFileName("file.ext");
+            log.Analyze(tooShortFileName);
 
-            Assert.True(result);
+            StringAssert.Contains("Filename too short: abc.ext", mockService.LastError);
         }
     }
 
-    internal class TestableLogAnalyzer : LogAnalyzer
+    public class FakeWebService : IWebService
     {
-        public bool IsSupported;
+        public string LastError;
 
-        protected override bool IsValid(string fileName)
+        public void LogError(string message)
         {
-            return IsSupported;
+            LastError = message;
         }
     }
 }

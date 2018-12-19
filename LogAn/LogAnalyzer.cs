@@ -2,22 +2,19 @@
 {
     public class LogAnalyzer
     {
-        public bool IsValidLogFileName(string fileName)
+        private IWebService service;
+
+        public LogAnalyzer(IWebService service)
         {
-            try
-            {
-                return IsValid(fileName);
-            }
-            catch
-            {
-                return false;
-            }
+            this.service = service;
         }
 
-        protected virtual bool IsValid(string fileName)
+        public void Analyze(string fileName)
         {
-            FileExtensionManager mgr = new FileExtensionManager();
-            return mgr.IsValid(fileName);
+            if(fileName.Length < 8)
+            {
+                service.LogError($"Filename too short: {fileName}");
+            }
         }
     }
 }

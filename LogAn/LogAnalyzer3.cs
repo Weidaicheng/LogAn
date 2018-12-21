@@ -15,7 +15,7 @@ namespace LogAn
         {
             if(fileName.Length < MinNameLength)
             {
-                _logger.LogError("too short");
+                _logger.LogError($"Filename too short: {fileName}");
             }
         }
     }

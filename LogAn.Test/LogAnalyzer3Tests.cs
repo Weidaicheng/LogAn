@@ -16,6 +16,16 @@ namespace LogAn.Test
 
             logger.Received().LogError("Filename too short: a.txt");
         }
+
+        [Test]
+        public void Returns_ByDefault_WorksForHardCodedArgument()
+        {
+            IFileNameRules fakeRules = Substitute.For<IFileNameRules>();
+
+            fakeRules.IsValidLogFileName(Arg.Any<string>()).Returns(true);
+
+            Assert.IsTrue(fakeRules.IsValidLogFileName("strict.txt"));
+        }
     }
 
     public class FakeLogger : ILogger
